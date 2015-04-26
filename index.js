@@ -16,18 +16,24 @@ function generateMeta(moduleNames, relPath, moduleSeletor) {
       'node_modules',
       moduleName,
       'package.json');
-    var modulePj;
+    var modulePkg;
     try {
-      modulePj = fs.readFileSync(modulePjPath, { encoding: 'utf8' });
+      var modulePj = fs.readFileSync(modulePjPath, { encoding: 'utf8' });
+      modulePkg = JSON.parse(modulePj);
     } catch (e) {
       // throw new Error('File not found for "' + modulePjPath + '".' +
       //   ' Make sure you have run npm install.');
-      modulePj = '{"name":"' + moduleName + '"}';
+      modulePkg = {
+        name: moduleName,
+        description:
+          "Package not found. " +
+          "Make sure you have run npm install."
+      };
     }
     if (moduleSeletor) {
-      seed[moduleName] = moduleSeletor(JSON.parse(modulePj));
+      seed[moduleName] = moduleSeletor(modulePkg);
     } else {
-      seed[moduleName] = JSON.parse(modulePj);
+      seed[moduleName] = modulePkg;
     }
     return seed;
   }, {});
