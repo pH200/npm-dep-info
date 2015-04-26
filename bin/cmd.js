@@ -4,7 +4,7 @@ var fs = require('fs');
 var path = require('path');
 var depInfo = require('../');
 
-cli.setApp('npm-dep-info', '1.0.3');
+cli.setApp('npm-dep-info', '1.1.0');
 
 cli.parse({
   markdown: ['M', 'Output as Markdown'],
