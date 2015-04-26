@@ -36,9 +36,16 @@ function generateMeta(moduleNames, relPath, moduleSeletor) {
   }, {});
 }
 
-function defaultOutput(pkg, relPath) {
+function defaultOutput(pkg, relPath, includes) {
   function moduleSeletor(m) {
     return m.description || '';
+  }
+  function includesSeletor(m) {
+    var modulePkg = { description: m.description };
+    includes.forEach(function (propName) {
+      modulePkg[propName] = m[propName];
+    });
+    return modulePkg;
   }
 
   var result = {};
@@ -46,19 +53,19 @@ function defaultOutput(pkg, relPath) {
     result.dependencies = generateMeta(
       Object.keys(pkg.dependencies),
       relPath,
-      moduleSeletor);
+      includes ? includesSeletor : moduleSeletor);
   }
   if (typeof pkg.devDependencies === 'object') {
     result.devDependencies = generateMeta(
       Object.keys(pkg.devDependencies),
       relPath,
-      moduleSeletor);
+      includes ? includesSeletor : moduleSeletor);
   }
 
   return result;
 }
 
-function markdownOutput(pkg, relPath) {
+function markdownOutput(pkg, relPath, includes) {
   var result = "";
 
   function depWriter(dep) {
@@ -68,6 +75,21 @@ function markdownOutput(pkg, relPath) {
     }
     if (dep.homepage) {
       result += dep.homepage + '\n\n';
+    }
+    if (includes) {
+      includes.forEach(function (propName) {
+        var prop = dep[propName];
+        if (!prop) {
+          return;
+        }
+        if (typeof prop === 'string') {
+          result += '#### ' + propName + '\n\n';
+          result += prop + '\n\n';
+        } else {
+          result += '#### ' + propName + '\n\n';
+          result += '```\n' + JSON.stringify(prop, null, 2) + '\n```\n\n';
+        }
+      });
     }
   }
 

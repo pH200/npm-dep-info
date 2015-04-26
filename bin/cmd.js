@@ -8,6 +8,12 @@ cli.setApp('npm-dep-info', '1.0.3');
 
 cli.parse({
   markdown: ['M', 'Output as Markdown'],
+  include: [
+    'I',
+    'Include extra properties from package.json of the dependency' +
+    ' (--include author,license)',
+    'string'
+  ],
   output: ['o', 'Write output to file', 'path'],
   input: ['i', 'Location of package.json (default ./)', 'path']
 });
@@ -36,12 +42,13 @@ cli.main(function (args, options) {
     return;
   }
 
+  var includes = options.include ? options.include.split(',') : null;
   var result;
   try {
     if (options.markdown) {
-      result = depInfo.markdownOutput(pkg, options.input);
+      result = depInfo.markdownOutput(pkg, options.input, includes);
     } else {
-      var depObj = depInfo.defaultOutput(pkg, options.input);
+      var depObj = depInfo.defaultOutput(pkg, options.input, includes);
       result = JSON.stringify(depObj, null, 2);
     }
   } catch (e) {

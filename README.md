@@ -59,10 +59,12 @@ for you, too.
 Usage:
   npm-dep-info [OPTIONS] [ARGS]
 
-Options:
-  -M, --markdown         Output as Markdown
-  -o, --output PATH      Write output to file
-  -i, --input PATH       Location of package.json (default ./)
+  Options:
+    -M, --markdown         Output as Markdown
+    -I, --include STRING   Include extra properties from package.json of the
+                           dependency (--include author,license)
+    -o, --output PATH      Write output to file
+    -i, --input PATH       Location of package.json (default ./)
 ```
 
 Output a description from the current directory:
@@ -78,3 +80,11 @@ Output to file:
 npm-dep-info -o dependencies.json
 npm-dep-info > dependencies.json # pipe
 ```
+
+Include extra info
+
+```
+npm-dep-info --include keywords,license # split by ","
+```
+
+[Output example](https://github.com/pH200/npm-dep-info/blob/master/example-2.md)
