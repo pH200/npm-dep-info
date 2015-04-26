@@ -1,0 +1,25 @@
+{
+  "name": "npm-dep-info",
+  "version": "1.0.0",
+  "description": "Generates a glimpse of descriptions for your dependencies in the package.json",
+  "bin": {
+    "npm-dep-info": "bin/cmd.js"
+  },
+  "main": "index.js",
+  "scripts": {
+    "example-json": "node bin/cmd.js -i node_modules/exorcist/ > example.json",
+    "example-md": "node bin/cmd.js -i node_modules/exorcist/ -M > example.md"
+  },
+  "keywords": [
+    "npm",
+    "dependencies",
+    "package.json",
+    "analyze",
+    "modules"
+  ],
+  "author": "pH200 <ph.minamo@cytisan.com>",
+  "license": "BSD",
+  "dependencies": {
+    "cli": "^0.6.6"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "dependencies": {
+    "minimist": "parse argument options",
+    "mold-source-map": "Mold a source map that is almost perfect for you into one that is.",
+    "nave": "Virtual Environments for Node"
+  },
+  "devDependencies": {
+    "tap": "A Test-Anything-Protocol library",
+    "browserify": "browser-side require() the node way",
+    "through2": "A tiny wrapper around Node streams2 Transform to avoid explicit subclassing noise"
+  }
+}
