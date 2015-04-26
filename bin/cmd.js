@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 var cli = require('cli').enable('version', 'status');
 var fs = require('fs');
 var path = require('path');
