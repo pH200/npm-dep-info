@@ -66,10 +66,10 @@ function defaultOutput(pkg, relPath, includes) {
 }
 
 function markdownOutput(pkg, relPath, includes) {
-  var result = "";
+  var result = '# ' + pkg.name + '\n\n';
 
   function depWriter(dep) {
-    result += "### " + dep.name + "\n\n";
+    result += '### ' + dep.name + '\n\n';
     if (dep.description) {
       result += dep.description + '\n\n';
     }
