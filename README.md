@@ -86,5 +86,3 @@ Include extra info
 ```
 npm-dep-info --include keywords,license # split by ","
 ```
-
-[Output example](https://github.com/pH200/npm-dep-info/blob/master/example-2.md)
