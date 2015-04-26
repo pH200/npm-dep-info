@@ -12,7 +12,7 @@ cli.parse({
   include: [
     'I',
     'Include extra properties from package.json of the dependency' +
-    ' (--include author,license)',
+    ' (e.g. --include version,homepage)',
     'string'
   ],
   output: ['o', 'Write output to file', 'path'],

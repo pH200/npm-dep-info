@@ -76,13 +76,13 @@ dependencies
 Usage:
   npm-dep-info [OPTIONS] [ARGS]
 
-  Options:
-    -M, --markdown         Output as Markdown
-    -T, --table            Output as table
-    -I, --include STRING   Include extra properties from package.json of the
-                           dependency (--include author,license)
-    -o, --output PATH      Write output to file
-    -i, --input PATH       Location of package.json (default ./)
+Options:
+  -M, --markdown         Output as Markdown
+  -T, --table            Output as table
+  -I, --include STRING   Include extra properties from package.json of the
+                         dependency (e.g. --include version,homepage)
+  -o, --output PATH      Write output to file
+  -i, --input PATH       Location of package.json (default ./)
 ```
 
 Output a description from the current directory:
@@ -103,5 +103,5 @@ npm-dep-info > dependencies.json # pipe
 Include extra info
 
 ```
-npm-dep-info --include keywords,license # split by ","
+npm-dep-info --include version,homepage # split by ","
 ```
