@@ -107,10 +107,9 @@ function markdownOutput(pkg, relPath, includes) {
 
   if (result === "") {
     return "No dependencies";
-  } else {
-    // trim linebreaks
-    return result.substr(0, result.length - 2);
   }
+  // trim linebreaks
+  return result.replace(/\n?\n$/m, '');
 }
 
 function tableOutput(pkg, relPath, includes) {
