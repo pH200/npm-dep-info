@@ -1,11 +1,16 @@
 {
   "name": "npm-dep-info",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Generates a glimpse of descriptions for your dependencies in the package.json",
   "bin": {
     "npm-dep-info": "bin/cmd.js"
   },
   "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pH200/npm-dep-info.git"
+  },
+  "homepage": "https://github.com/pH200/npm-dep-info",
   "scripts": {
     "example-json": "node bin/cmd.js -i node_modules/exorcist/ > example.json",
     "example-md": "node bin/cmd.js -i node_modules/exorcist/ -M > example.md"
