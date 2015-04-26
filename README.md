@@ -57,7 +57,7 @@ for you, too.
 
 ```
 Usage:
-  dep-info [OPTIONS] [ARGS]
+  npm-dep-info [OPTIONS] [ARGS]
 
 Options:
   -M, --markdown         Output as Markdown

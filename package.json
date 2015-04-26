@@ -1,6 +1,6 @@
 {
   "name": "npm-dep-info",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Generates a glimpse of descriptions for your dependencies in the package.json",
   "bin": {
     "npm-dep-info": "bin/cmd.js"
