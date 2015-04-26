@@ -53,6 +53,23 @@ It can generate a
 [Markdown file](https://github.com/pH200/npm-dep-info/blob/master/example.md)
 for you, too.
 
+And a table output:
+
+```
+dependencies
+┌─────────────────┬───────────────────────────────────────────────────────┐
+│ name            │ description                                           │
+├─────────────────┼───────────────────────────────────────────────────────┤
+│ minimist        │ parse argument options                                │
+├─────────────────┼───────────────────────────────────────────────────────┤
+│ mold-source-map │ Mold a source map that is almost perfect for you into │
+│                 │ one that is.                                          │
+├─────────────────┼───────────────────────────────────────────────────────┤
+│ nave            │ Virtual Environments for Node                         │
+└─────────────────┴───────────────────────────────────────────────────────┘
+...
+```
+
 ## Usage
 
 ```
@@ -61,6 +78,7 @@ Usage:
 
   Options:
     -M, --markdown         Output as Markdown
+    -T, --table            Output as table
     -I, --include STRING   Include extra properties from package.json of the
                            dependency (--include author,license)
     -o, --output PATH      Write output to file
@@ -72,6 +90,7 @@ Output a description from the current directory:
 ```
 npm-dep-info
 npm-dep-info -M # markdown
+npm-dep-info -T # table
 ```
 
 Output to file:
