@@ -2,9 +2,6 @@ var fs = require('fs');
 var path = require('path');
 var url = require('url');
 
-var pj = fs.readFileSync('package.json', { encoding: 'utf8' });
-var pkg = JSON.parse(pj);
-
 function eachValue(obj, iterator) {
   var keys = Object.keys(obj);
   for (var i = 0; i < keys.length; i++) {
