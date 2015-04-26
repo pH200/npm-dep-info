@@ -1,6 +1,6 @@
 var fs = require('fs');
 var path = require('path');
-var url = require('url');
+var Table = require('cli-table');
 
 function eachValue(obj, iterator) {
   var keys = Object.keys(obj);
@@ -113,7 +113,95 @@ function markdownOutput(pkg, relPath, includes) {
   }
 }
 
+function tableOutput(pkg, relPath, includes) {
+  function stringifyObject(obj) {
+    if (typeof obj === 'string') {
+      return obj;
+    }
+    if (obj && typeof obj === 'object') {
+      for (var propName in obj) {
+        var prop = obj[propName];
+        if (typeof prop === 'string') {
+          return prop + '...';
+        }
+      }
+    }
+    return '';
+  }
+  function ellipsis(str, len) {
+    if (str.length > len) {
+      return str.substr(0, len - 2) + '..';
+    }
+    return str;
+  }
+  function wrap(str, len) {
+    var words = str.split(' ');
+    var output = [""];
+    while (words.length > 0) {
+      var word = words.shift();
+      if (word.length > len) {
+        word = ellipsis(word, len);
+      }
+      var lastIndex = output.length - 1;
+      var line = output[lastIndex];
+      if ((line + word).length > len) {
+        output.push(word);
+      } else {
+        output[lastIndex] = line + ' ' + word;
+      }
+    }
+    return output.join('\n').replace(/^\s/, '');
+  }
+  function tableWriter(dependencies) {
+    var head = ['name', 'description'];
+    if (includes) {
+      head = head.concat(includes);
+    }
+    var options = {
+      head: head
+    };
+
+    var table = new Table(options);
+
+    eachValue(dependencies, function (dep) {
+      var row = [
+        ellipsis(dep.name, 18),
+        wrap(dep.description, 54)
+      ];
+
+      if (includes) {
+        includes.forEach(function (propName) {
+          row.push(stringifyObject(dep[propName]));
+        });
+      }
+
+      table.push(row);
+    });
+
+    return table.toString();
+  }
+
+  var result = "";
+  if (typeof pkg.dependencies === 'object') {
+    var dependencies = generateMeta(
+      Object.keys(pkg.dependencies),
+      relPath);
+    result += 'dependencies\n';
+    result += tableWriter(dependencies) + '\n';
+  }
+  if (typeof pkg.devDependencies === 'object') {
+    var devDependencies = generateMeta(
+      Object.keys(pkg.devDependencies),
+      relPath);
+    result += 'devDependencies\n';
+    result += tableWriter(devDependencies) + '\n';
+  }
+
+  return result;
+}
+
 module.exports = {
   defaultOutput: defaultOutput,
-  markdownOutput: markdownOutput
+  markdownOutput: markdownOutput,
+  tableOutput: tableOutput
 }

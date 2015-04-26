@@ -27,6 +27,7 @@
   "author": "pH200 <ph.minamo@cytisan.com>",
   "license": "BSD",
   "dependencies": {
-    "cli": "^0.6.6"
+    "cli": "^0.6.6",
+    "cli-table": "^0.3.1"
   }
 }

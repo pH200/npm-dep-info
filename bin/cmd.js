@@ -8,6 +8,7 @@ cli.setApp('npm-dep-info', '1.2.0');
 
 cli.parse({
   markdown: ['M', 'Output as Markdown'],
+  table: ['T', 'Output as table'],
   include: [
     'I',
     'Include extra properties from package.json of the dependency' +
@@ -47,6 +48,8 @@ cli.main(function (args, options) {
   try {
     if (options.markdown) {
       result = depInfo.markdownOutput(pkg, options.input, includes);
+    } else if (options.table) {
+      result = depInfo.tableOutput(pkg, options.input, includes);
     } else {
       var depObj = depInfo.defaultOutput(pkg, options.input, includes);
       result = JSON.stringify(depObj, null, 2);
