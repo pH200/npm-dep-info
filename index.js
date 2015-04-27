@@ -21,8 +21,6 @@ function generateMeta(moduleNames, relPath, moduleSeletor) {
       var modulePj = fs.readFileSync(modulePjPath, { encoding: 'utf8' });
       modulePkg = JSON.parse(modulePj);
     } catch (e) {
-      // throw new Error('File not found for "' + modulePjPath + '".' +
-      //   ' Make sure you have run npm install.');
       modulePkg = {
         name: moduleName,
         description:
@@ -157,18 +155,16 @@ function tableOutput(pkg, relPath, includes) {
     }
     return output.join('\n').replace(/^\s/, '');
   }
-  function tableWriter(dependencies) {
+  function tableWriter(deps) {
     var head = ['name', 'description'];
     if (includes) {
       head = head.concat(includes);
     }
-    var options = {
+    var table = new Table({
       head: head
-    };
+    });
 
-    var table = new Table(options);
-
-    eachValue(dependencies, function (dep) {
+    eachValue(deps, function (dep) {
       var row = [
         ellipsis(dep.name, 18),
         wrap(dep.description, 54)
@@ -209,4 +205,4 @@ module.exports = {
   defaultOutput: defaultOutput,
   markdownOutput: markdownOutput,
   tableOutput: tableOutput
-}
+};
